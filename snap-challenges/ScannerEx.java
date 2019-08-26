@@ -5,7 +5,7 @@
 
 import java.util.*;
 
-class Main {
+class ScannerEx {
     /**
     * This class builds a scanner to take user input.
     * @param args Command line arguments are ignored.
