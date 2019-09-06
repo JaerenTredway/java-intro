@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class GuessNumber {
 
     /**
-     * This main() method plays a game with the user by randomly generating a number from 1 to 10
+     * This main() method plays a game with the user by randomly generating
+     *  a number from 1 to 10
      *  and making the user try to guess it.
      * @param args Command line arguments are ignored.
      */
@@ -16,7 +17,8 @@ public class GuessNumber {
         Scanner scanner = new Scanner(System.in);
         String userName = scanner.nextLine();
 
-        System.out.println(userName + ", please pick a number between 1 and 10");
+        System.out.println(userName
+                + ", please pick a number between 1 and 10");
         int guess = scanner.nextInt();
         System.out.println("You guessed " + guess);
 
@@ -24,7 +26,8 @@ public class GuessNumber {
         System.out.println("I was thinking of " + randomNum);
 
         if (randomNum == guess) {
-            System.out.println("Congratulations, " + userName + "! You guessed my number! ");
+            System.out.println("Congratulations, "
+                    + userName + "! You guessed my number! ");
         } else {
             System.out.println("Better luck next time, " + userName);
         }
