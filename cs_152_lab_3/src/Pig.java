@@ -82,8 +82,8 @@ public class Pig {
             System.out.println("FINAL SCORE:");
             System.out.println(players[0] + ": " + scores[0] + " vs. " + players[1] + ": " + scores[1]);
             if (scores[0] >= winningScore && scores[1] >= winningScore) {
-                System.out.println("\nCongratulations, " + players[0] + " and " + players[0] +
-                        ", you both got over " + winningScore + ", TIE GAME!");
+                System.out.println("\nCongratulations, " + players[0] + " and " + players[1] +
+                        ", you both got " + winningScore + " or over, TIE GAME!");
             } else if (scores[0] >= winningScore) {
                 System.out.println("\nCongratulations, " + players[0] + ", YOU WIN!");
             } else {
