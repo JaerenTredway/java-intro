@@ -4,6 +4,7 @@
  * Implement all the methods described below.
  *
  * Student name: Jaeren Tredway
+ * lab section 006
  */
 public class MethodPractice {
 
@@ -15,8 +16,8 @@ public class MethodPractice {
      * @return Maximum of x, y and z
      */
     public static int findLargest( int x, int y, int z) {
-        int largest = (x > y) ? x : y;
-        largest = (z > largest) ? z : largest;
+        int largest = Math.max(x, y);
+        largest = Math.max(z, largest);
         return largest;
     }
 
@@ -140,7 +141,6 @@ public class MethodPractice {
 
         if( indexOfG( "man" ) == -1 ) { numCorrect++; System.out.println(10);}
         if( indexOfG( "EGGSHELL" ) == 1 ) { numCorrect++; System.out.println(11);}
-        System.out.println(indexOfG("dog"));
         if( indexOfG( "dog" ) == 2 ) { numCorrect++; System.out.println(12);}
         if( indexOfG( "xyzggGGggG" ) == 3 ) { numCorrect++; System.out.println(13);}
         if( indexOfG( "xyzGGggGGg" ) == 3 ) { numCorrect++; System.out.println(14);}
@@ -154,19 +154,15 @@ public class MethodPractice {
         if( averageOfEvensOnly(12, 13, 12, 13, 12) == 12.0) { numCorrect++; System.out.println(20);}
         if( averageOfEvensOnly(-1, 3, -5, 7, 9) == -1000.0) { numCorrect++; System.out.println(21);}
         if( averageOfEvensOnly(0, 0, 15, 0, -2) == -0.5) { numCorrect++; System.out.println(22);}
-        System.out.println(averageOfEvensOnly(0,0, 15,0,-2));
-        System.out.println("-2 % 2 = " + (-2 % 2));
         if( averageOfEvensOnly(100, -3, 4021, -2, 13) == 49.0) { numCorrect++; System.out.println(23);}
 
         if( doubleOddSquareEven( 4 ) == 16 ) { numCorrect++; System.out.println(24);}
         if( doubleOddSquareEven( 3 ) == 6 ) { numCorrect++; System.out.println(25);}
 
         if( computeMealTotal( 0, .3 ) == -1 ) { numCorrect++; System.out.println(26);}
-        System.out.println(computeMealTotal(0,.3));
         if( computeMealTotal( 10, .2 ) == 12.0 ) { numCorrect++; System.out.println(27);}
         if( computeMealTotal( 100, .5 ) == 150 ) { numCorrect++; System.out.println(28);}
         if( computeMealTotal( 100, .71 ) == -1 ) { numCorrect++; System.out.println(29);}
-        System.out.println(computeMealTotal(100,.71));
         if( computeMealTotal( 120, .32 ) == 158.4 ) { numCorrect++; System.out.println(30);}
 
         System.out.println( "Your program's completeness is currently: "
