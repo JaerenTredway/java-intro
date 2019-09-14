@@ -80,8 +80,16 @@ public class MethodPractice {
      * @return Average of the even input values. If none are even, returns -1000.
      */
     public static double averageOfEvensOnly( int a, int b, int c, int d, int e ) {
-
-        return -4.2;
+        int[] list = {a, b, c, d, e};
+        int sum = 0;
+        int count = 0;
+        for (int num : list) {
+            if (num % 2 == 0) {
+                sum += num;
+                count++;
+            }
+        }
+        return (count > 0) ? sum / count : -1000;
     }
 
 
