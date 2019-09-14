@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class Pig {
     /**
      * This program plays a game where users take turns rolling dice, adding
-     * the result to their total score. But a  roll of one ends the turn with
-     * zero points scored for that turn. First player to 100 wins.
+     * the result to their total score. But after the first roll, a roll of one
+     * ends that turn with zero points scored for that turn. First player to
+     * 100 wins.
      *
      * @param args Command line arguments are ignored.
      */
@@ -17,9 +18,8 @@ public class Pig {
         int turn = 1;
         int numPlayers;
         Scanner scanner = new Scanner(System.in);
-        //String answer; ...keep it local scope?....
         boolean gameSession;
-        int winningScore = 20;
+        int winningScore = 100;
 
         // GAME SETUP SECTION: **********************
         System.out.println("WELCOME TO THE PIG GAME!");
@@ -42,31 +42,29 @@ public class Pig {
         //GAME PLAY SECTION: **************************
         do {
             while (scores[0] < winningScore && scores[1] < winningScore) {
-                //START OF TURN:
+                //START OF GAME TURN: **************************
                 System.out.println("\nTURN " + turn);
-                System.out.println("SCORE: " + players[0] + ": " + scores[0] + " vs" +
-                        ". " + players[1] + ": " + scores[1]);
+                System.out.println("SCORE: " + players[0] + ": " + scores[0] +
+                        " vs" + ". " + players[1] + ": " + scores[1]);
                 for (int i = 0; i < 2; i++) {
-                    //START OF ONE PLAYER'S TURN:
+                    //START OF ONE PLAYER'S TURN:**********
                     System.out.println();
                     boolean activeTurn;
                     int turnScore = 0;
-                    boolean firstRoll = true;
                     do {
-                        System.out.println(players[i].toUpperCase() + ", it is your turn: ");
+                        System.out.println(players[i].toUpperCase() + ", it " +
+                                "is your turn: ");
                         int roll = (int) (Math.random() * 6) + 1;
                         System.out.println("You rolled a " + roll);
-                        if (roll == 1 && !firstRoll) {
-                            System.out.println(players[i] + ", you lost your " +
+                        if (roll == 1) {
+                            System.out.println(players[i] + ", you lost your" +
                                     "points for this turn!\n");
                             turnScore = 0;
                             activeTurn = false;
                         } else {
-                            if (roll == 1) System.out.println("You rolled a one, but it's your first " +
-                                    "roll so you're OK!");
                             turnScore = turnScore + roll;
-                            firstRoll = false;
-                            System.out.println("Okay, " + players[i] + ", you have " + turnScore +
+                            System.out.println("Okay, " + players[i] + ", " +
+                                    "you have " + turnScore +
                                     " points so far for this turn.");
                             System.out.println("Roll again? ");
                             String answer = scanner.nextLine();
@@ -77,19 +75,26 @@ public class Pig {
                 } //END OF ONE PLAYER'S TURN
                 System.out.println();
                 turn++;
-            } //END OF TURN
+            } //END OF GAME TURN
 
+            //FINAL REPORT FOR GAME: ****************************
             System.out.println("FINAL SCORE:");
-            System.out.println(players[0] + ": " + scores[0] + " vs. " + players[1] + ": " + scores[1]);
+            System.out.println(players[0] + ": " + scores[0] + " vs. " +
+                    players[1] + ": " + scores[1]);
             if (scores[0] >= winningScore && scores[1] >= winningScore) {
-                System.out.println("\nCongratulations, " + players[0] + " and " + players[1] +
-                        ", you both got " + winningScore + " or over, TIE GAME!");
+                System.out.println("\nCongratulations, " + players[0] + " " +
+                        "and " + players[1] +
+                        ", you both got " + winningScore + " or more, TIE " +
+                        "GAME!");
             } else if (scores[0] >= winningScore) {
-                System.out.println("\nCongratulations, " + players[0] + ", YOU WIN!");
+                System.out.println("\nCongratulations, " + players[0] + ", " +
+                        "YOU WIN!");
             } else {
-                System.out.println("\nCongratulations, " + players[1] + ", YOU WIN!");
+                System.out.println("\nCongratulations, " + players[1] + ", " +
+                        "YOU WIN!");
             }
 
+            // "PLAY AGAIN OR QUIT" SECTION:
             scores[0] = 0;
             scores[1] = 0;
             turn = 1;
