@@ -16,7 +16,7 @@ public class MethodPractice {
      * @param z Third argument
      * @return Maximum of x, y and z
      */
-    public static int findLargest(int x, int y, int z) {
+    private static int findLargest(int x, int y, int z) {
         int largest = Math.max(x, y);
         largest = Math.max(z, largest);
         return largest;
@@ -29,7 +29,7 @@ public class MethodPractice {
      * @param x Value to check.
      * @return True if x is an even number, false otherwise.
      */
-    public static boolean isEven(int x) {
+    private static boolean isEven(int x) {
         return (x % 2 == 0);
     }
 
@@ -40,7 +40,7 @@ public class MethodPractice {
      * @param x String to check
      * @return True if x contains G, false otherwise.
      */
-    public static boolean hasG(String x) {
+    private static boolean hasG(String x) {
         return x.toLowerCase().contains("g");
     }
 
@@ -52,7 +52,7 @@ public class MethodPractice {
      * @return 0 based location of first occurrence of G in x,
      * -1 if G is not present.
      */
-    public static int indexOfG(String x) {
+    private static int indexOfG(String x) {
         return x.toUpperCase().indexOf("G");
     }
 
@@ -68,7 +68,7 @@ public class MethodPractice {
      * @param input The input string
      * @return Corresponding output string.
      */
-    public static String respond(String input) {
+    private static String respond(String input) {
         return  (input.equals("Apple")) ? "Orange" :
                 (input.equals("Hello")) ? "Goodbye!" :
                 (input.equals("Turing")) ? "Machine" :
@@ -87,7 +87,7 @@ public class MethodPractice {
      * @return Average of the even input values. If none are even, returns
      *  -1000.
      */
-    public static double averageOfEvensOnly(int a, int b, int c, int d, int e) {
+    private static double averageOfEvensOnly(int a, int b, int c, int d, int e) {
         int[] list = {a, b, c, d, e};
         int sum = 0;
         int count = 0;
@@ -109,7 +109,7 @@ public class MethodPractice {
      * @param x integer value to be processed
      * @return integer result
      */
-    public static int doubleOddSquareEven(int x) {
+    private static int doubleOddSquareEven(int x) {
         return (x % 2 == 0) ? x * x : 2 * x;
     }
 
@@ -121,7 +121,7 @@ public class MethodPractice {
      * @param tip  double percentage of tip
      * @return double total cost of meal with tip
      */
-    public static double computeMealTotal(int meal, double tip) {
+    private static double computeMealTotal(int meal, double tip) {
         double tipCost = meal * tip;
         if (meal <= 0 || tip < 0 || tip > 0.7) {
             return -1;
