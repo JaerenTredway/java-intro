@@ -3,7 +3,7 @@
  * Implement all the methods described below.
  *
  * @version 1.0
- * @author  Jaeren Tredway
+ * @author  Jaeren W. Tredway
  * lab section 006
  */
 public class MethodPractice {
