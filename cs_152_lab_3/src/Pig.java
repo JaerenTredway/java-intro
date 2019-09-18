@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * @author Jaeren Tredway
+ * @author Jaeren W. Tredway
  * @version 1.0 2019-09-06
  */
 public class Pig {
