@@ -1,6 +1,6 @@
 /**
  * @version 1.0 2019-08-21
- * @author Jaeren William Tredway
+ * @author Jaeren W. Tredway
  */
 public class AsciiArt {
     /**
