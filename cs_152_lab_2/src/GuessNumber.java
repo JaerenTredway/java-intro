@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * @version 1.0 2019-08-28
- * @author Jaeren Tredway
+ * @author Jaeren W. Tredway
  */
 public class GuessNumber {
 
