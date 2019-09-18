@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This program takes an array of integers and keeps 'x' number of
- * duplicates entries.
+ * This program takes an array of integers and keeps 'maxOccurrences' number of
+ * duplicate entries.
  * @author Jaeren Tredway
  * @version 1.0
  */
 public class keepXDuplicates {
     /**
-     *
+     * Main method launches app.
      * @param args Command line arguments are ignored
      */
     public static void main(String[] args) {
@@ -22,8 +22,8 @@ public class keepXDuplicates {
     }
 
     /**
-     * This method pairs down an input array as described below:
-     * @param elements array of integers
+     * 'deleteNth' method pairs down an input array as described below:
+     * @param elements input array of integers
      * @param maxOccurrences the max number of duplicate entries to return
      * @return returns a new array with only the 'maxOccurrence' number of any
      * given element
@@ -36,7 +36,7 @@ public class keepXDuplicates {
         //Create a HashMap object:
         HashMap<Integer, Integer> elementCountMap = new HashMap<>();
 
-        //check for bogus input:
+        //check for bogus parameters:
         if (elements == null || elements.length == 0 || maxOccurrences == 0) {
             return new int[0];
         }
