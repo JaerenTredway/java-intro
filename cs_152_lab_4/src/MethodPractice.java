@@ -11,9 +11,9 @@ public class MethodPractice {
     /**
      * Returns largest of its arguments.
      *
-     * @param x First argument
-     * @param y Second argument
-     * @param z Third argument
+     * @param x First integer argument
+     * @param y Second integer argument
+     * @param z Third integer argument
      * @return Maximum of x, y and z
      */
     private static int findLargest(int x, int y, int z) {
@@ -117,9 +117,9 @@ public class MethodPractice {
     // WRITE A METHOD FROM SCRATCH:
 
     /**
-     * @param meal integer cost of meal
-     * @param tip  double percentage of tip
-     * @return double total cost of meal with tip
+     * @param meal integer type with cost of meal
+     * @param tip  double type with percentage of tip
+     * @return double type with total cost of meal with tip
      */
     private static double computeMealTotal(int meal, double tip) {
         double tipCost = meal * tip;
@@ -133,6 +133,7 @@ public class MethodPractice {
 
     // This code tests your program's completeness.
     public static void main(String[] args) {
+        System.out.println("\nThe following tests have passed: ");
         int numCorrect = 0;
 
         if (findLargest(1, 2, 3) == 3) {
