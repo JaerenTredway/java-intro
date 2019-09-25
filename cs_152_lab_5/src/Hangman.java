@@ -20,7 +20,7 @@ public class Hangman {
      * @return Randomly chosen word from dictionary.
      */
     public static String chooseRandomWord(String[] dictionary) {
-        int randomNum = (int)(Math.random() * dictionary.length - 1);
+        int randomNum = (int)(Math.random() * dictionary.length);
         return dictionary[randomNum];
     }
     
@@ -30,8 +30,11 @@ public class Hangman {
      * @return True if knownLetters has blanks.
      */
     public static boolean isIncomplete(char[] knownLetters) {
-        // REPLACE THE METHOD BODY
-        return false;
+        for (char element : knownLetters) {
+            if (element == '*') {
+                return true;
+            }
+        } return false;
     }
 
     /**
@@ -46,8 +49,15 @@ public class Hangman {
     public static boolean updateWithGuess(char[] knownLetters,
                                           String word,
                                           char guessedLetter) {
-        // REPLACE THE METHOD BODY
-        return false;
+        boolean guess = false;
+
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == guessedLetter) {
+                knownLetters[i] = guessedLetter;
+                guess = true;
+            }
+        }
+        return guess;
     }
 
 
@@ -190,6 +200,8 @@ public class Hangman {
         } else {
             System.out.println("Hooray! You win!");
         }
-    }
 
+
+
+    }//end main() method
 }
