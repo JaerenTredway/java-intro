@@ -3,7 +3,9 @@
  *
  * Implement the methods needed to play a game of hangman.
  *
- * Student name: YOUR NAME GOES HERE
+ * Student name: Jaeren William Tredway
+ * @author Jaeren W. Tredway
+ * @version 1.0
  */
 import java.util.Scanner;
 
@@ -18,10 +20,8 @@ public class Hangman {
      * @return Randomly chosen word from dictionary.
      */
     public static String chooseRandomWord(String[] dictionary) {
-        // REPLACE THE METHOD BODY
-        // I suggest you implement this method first, since
-        // the program will crash if it returns null.
-        return null;
+        int randomNum = (int)(Math.random() * dictionary.length - 1);
+        return dictionary[randomNum];
     }
     
     /** 
