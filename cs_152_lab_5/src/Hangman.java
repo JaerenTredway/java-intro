@@ -201,7 +201,5 @@ public class Hangman {
             System.out.println("Hooray! You win!");
         }
 
-
-
     }//end main() method
 }
