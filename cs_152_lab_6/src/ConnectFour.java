@@ -122,8 +122,19 @@ public class ConnectFour {
      */
     public static char findLocalWinner(char[][] board, int r, int c,
                                         int rowOffset, int colOffset) {
-        // TODO You have to write this.
-        return 'Q';
+
+        //eject out of method if there are not 4 spaces total in your chosen
+        //direction:
+        if (r + (rowOffset * 3) > ROWS || r + (rowOffset * 3) < 0) return NONE;
+        if (c + (colOffset * 3) > COLUMNS || c + (colOffset * 3) < 0) return NONE;
+
+        char result = NONE;
+        char startVal = board[r][c];
+        for (int i = 0; i < 3; i++) {
+            if (board[r + (i*rowOffset)][c + (i*colOffset)] != startVal) {
+                break;
+            } else result = startVal;
+        } return result;
     }
 
     /**
@@ -134,9 +145,23 @@ public class ConnectFour {
      * winner yet.
      */
     public static char findWinner(char[][] board) {
-        // TODO You have to write this.
-        // HINT: You should call the findLocalWinner method to help you
-        return 'Q';
+        char result = NONE;
+
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                int r = i;
+                int c = j;
+                result = findLocalWinner(board, r, c, 0, 1);
+                result = findLocalWinner(board, r, c, 1, 0);
+                result = findLocalWinner(board, r, c, 1, 1);
+                result = findLocalWinner(board, r, c, 0, -1);
+                result = findLocalWinner(board, r, c, -1, 0);
+                result = findLocalWinner(board, r, c, -1, -1);
+                result = findLocalWinner(board, r, c, -1, 1);
+                result = findLocalWinner(board, r, c, 1, -1);
+            }
+        }
+        return result;
     }
 
     /**
