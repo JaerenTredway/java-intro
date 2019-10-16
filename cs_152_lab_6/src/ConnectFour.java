@@ -27,8 +27,14 @@ public class ConnectFour {
      * @return String representation of the board.
      */
     public static String boardToString(char[][] gameBoard) {
-        // TODO you have to write this
-        return "this is not the correct string!";
+        String result = "";
+        for (int i = ROWS - 1; i >= 0; i--) {
+            for (int j = 0; j < COLUMNS; j++) {
+                result = result + gameBoard[i][j];
+            }
+            result += "\n";
+        }
+        return result;
     }
 
     /**
@@ -40,8 +46,14 @@ public class ConnectFour {
      * @param player Whose piece to drop.
      */
     public static void dropPiece(char[][] board, int column, char player) {
-        // TODO You have to write this.
+        for (int i = ROWS - 1; i >= 0; i--) {
+            if (board[i][column] == NONE) {
+                board[i][column] = player;
+                break;
+            }
+        }
     }
+
 
     /**
      * Checks if the board is full.

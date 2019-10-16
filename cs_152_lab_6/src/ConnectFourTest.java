@@ -47,6 +47,9 @@ public class ConnectFourTest {
             ".......\n" +
             ".......\n";
         countTest(ConnectFour.boardToString(board).equals(emptyBoardStr));
+        if (ConnectFour.boardToString(board).equals(emptyBoardStr)) {
+            System.out.println("boardToString(empty): passed");
+        }
 
         board[0][2] = ConnectFour.HUMAN;
         board[1][2] = ConnectFour.COMPUTER;
@@ -58,6 +61,13 @@ public class ConnectFourTest {
             "..X....\n" +
             "..O....\n";
         countTest(ConnectFour.boardToString(board).equals(boardStr));
+        if (ConnectFour.boardToString(board).equals(boardStr)) {
+            System.out.println("boardToString(modified): passed");
+        }
+
+        //display boardToString result:
+        System.out.println(ConnectFour.boardToString(board));
+
     }
 
     public static void testGetOpposite() {
