@@ -82,6 +82,8 @@ public class ConnectFourTest {
         countTest(ConnectFour.NONE == board[1][2]);
         countTest(ConnectFour.NONE == board[0][1]);
         countTest(ConnectFour.NONE == board[0][3]);
+        //display boardToString result:
+        System.out.println(ConnectFour.boardToString(board));
         ConnectFour.dropPiece(board, 2, ConnectFour.HUMAN);
         countTest(ConnectFour.HUMAN == board[1][2]);
         countTest(ConnectFour.COMPUTER == board[0][2]);
@@ -92,7 +94,10 @@ public class ConnectFourTest {
                                                           ".......\n" +
                                                           "..O....\n" +
                                                           "..X....\n"));
+        //display boardToString result:
+        System.out.println(ConnectFour.boardToString(board));
     }
+
 
     public static void testIsLegalMove() {
         char[][] board = emptyBoard();

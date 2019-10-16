@@ -46,7 +46,7 @@ public class ConnectFour {
      * @param player Whose piece to drop.
      */
     public static void dropPiece(char[][] board, int column, char player) {
-        for (int i = ROWS - 1; i >= 0; i--) {
+        for (int i = 0; i < ROWS ; i++) {
             if (board[i][column] == NONE) {
                 board[i][column] = player;
                 break;
@@ -61,8 +61,13 @@ public class ConnectFour {
      * @return True if board is full, false if not.
      */
     public static boolean isFull(char[][] board) {
-        // TODO You have to write this.
-        return false;
+        boolean result = true;
+
+        for (int i = 0; i < COLUMNS; i++) {
+            if (board[ROWS-1][i] == NONE) result = false;
+        }
+
+        return result;
     }
 
     /**
@@ -74,8 +79,12 @@ public class ConnectFour {
      * @return true if column is neither off the edge of the board nor full.
      */
     public static boolean isLegalMove(char[][] board, int column) {
-        // TODO You have to write this.
-        return false;
+        boolean result = true;
+
+        if (column < 0 || column > COLUMNS - 1) return false;
+        if (board[ROWS-1][column] != NONE) return false;
+
+        return result;
     }
 
     /**
