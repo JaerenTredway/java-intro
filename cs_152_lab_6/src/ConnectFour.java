@@ -95,8 +95,8 @@ public class ConnectFour {
      * @return Opponent player character
      */
     public static char getOpposite(char player) {
-        // TODO You have to write this.
-        return 'Q';
+
+        return player == HUMAN ? COMPUTER : HUMAN;
     }
 
     /**
