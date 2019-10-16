@@ -87,7 +87,8 @@ public class MethodPractice {
      * @return Average of the even input values. If none are even, returns
      *  -1000.
      */
-    private static double averageOfEvensOnly(int a, int b, int c, int d, int e) {
+    private static double averageOfEvensOnly(int a, int b, int c, int d,
+                                             int e) {
         int[] list = {a, b, c, d, e};
         int sum = 0;
         int count = 0;
@@ -264,6 +265,7 @@ public class MethodPractice {
             System.out.println(30);
         }
 
-        System.out.println("Your program's completeness is currently: " + numCorrect + "/30");
+        System.out.println("Your program's completeness is currently: " +
+                numCorrect + "/30");
     }
 }
