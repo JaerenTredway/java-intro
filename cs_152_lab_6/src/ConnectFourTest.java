@@ -251,6 +251,9 @@ public class ConnectFourTest {
         }
         // Human can win in three moves
         countTest(-10 == ConnectFour.minScoreForHuman(board, 3, 0));
+        if (ConnectFour.minScoreForHuman(board, 3, 0) == -10) {
+            System.out.println("testMin passed");
+        }
     }
 
     public static void testBestMoveForComputer() {
@@ -300,7 +303,7 @@ public class ConnectFourTest {
             correctTests++;
         } else {
             // Uncomment next line for a trace of which test failed.
-            //new Exception("Failed Test").printStackTrace();
+            new Exception("Failed Test").printStackTrace();
         }
         totalTests++;
     }

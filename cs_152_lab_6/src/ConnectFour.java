@@ -125,16 +125,18 @@ public class ConnectFour {
 
         //eject out of method if there are not 4 spaces total in your chosen
         //direction:
-        if (r + (rowOffset * 3) > ROWS || r + (rowOffset * 3) < 0) return NONE;
-        if (c + (colOffset * 3) > COLUMNS || c + (colOffset * 3) < 0) return NONE;
+        if (r + (rowOffset * 3) > ROWS-1 || r + (rowOffset * 3) < 0) return NONE;
+        if (c + (colOffset * 3) > COLUMNS-1 || c + (colOffset * 3) < 0) return NONE;
 
-        char result = NONE;
         char startVal = board[r][c];
-        for (int i = 0; i < 3; i++) {
+
+        for (int i = 0; i < 4; i++) {
             if (board[r + (i*rowOffset)][c + (i*colOffset)] != startVal) {
+                startVal = NONE;
                 break;
-            } else result = startVal;
-        } return result;
+            }
+        }
+        return startVal;
     }
 
     /**
@@ -147,17 +149,25 @@ public class ConnectFour {
     public static char findWinner(char[][] board) {
         char result = NONE;
 
+        outerBlock:
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 int r = i;
                 int c = j;
                 result = findLocalWinner(board, r, c, 0, 1);
+                if (result != NONE) break outerBlock;
                 result = findLocalWinner(board, r, c, 1, 0);
+                if (result != NONE) break outerBlock;
                 result = findLocalWinner(board, r, c, 1, 1);
+                if (result != NONE) break outerBlock;
                 result = findLocalWinner(board, r, c, 0, -1);
+                if (result != NONE) break outerBlock;
                 result = findLocalWinner(board, r, c, -1, 0);
-                result = findLocalWinner(board, r, c, -1, -1);
+                if (result != NONE) break outerBlock;
+                result= findLocalWinner(board, r, c, -1, -1);
+                if (result != NONE) break outerBlock;
                 result = findLocalWinner(board, r, c, -1, 1);
+                if (result != NONE) break outerBlock;
                 result = findLocalWinner(board, r, c, 1, -1);
             }
         }
@@ -187,10 +197,30 @@ public class ConnectFour {
      * @param depth Current search depth.
      */
     public static int maxScoreForComputer(char[][] board, int maxDepth, int depth) {
-        // TODO You have to write this.
-        // Hint: this will be similar to minScoreForHuman
-        return 0;
+
+        char winner = findWinner(board);
+        if (winner == HUMAN) {
+            return -10;
+        } else if (winner == COMPUTER) {
+            return 10;
+        } else if (isFull(board) || (depth == maxDepth)) {
+            return 0;
+        } else {
+            int bestResult = 20;
+            for (int c = 0; c < COLUMNS; c++) {
+                if (isLegalMove(board, c)) {
+                    dropPiece(board, c, COMPUTER);
+                    int result = minScoreForHuman(board, maxDepth, depth + 1);
+                    undoDrop(board, c);
+                    if (result <= bestResult) {
+                        bestResult = result;
+                    }
+                }
+            }
+            return bestResult;
+        }
     }
+
 
     /**
      * Returns the value of board with human to move:
@@ -203,10 +233,6 @@ public class ConnectFour {
      * @param depth Current search depth.
      */
     public static int minScoreForHuman(char[][] board, int maxDepth, int depth) {
-
-        // The comments in this method are rather verbose to help you
-        // understand what is going on. I don't expect you to be so
-        // wordy in your own code.
 
         // First, see if anyone is winning already
         char winner = findWinner(board);
