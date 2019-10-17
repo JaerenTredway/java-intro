@@ -181,9 +181,31 @@ public class ConnectFour {
      * @return Column index for computer player's best move.
      */
     public static int bestMoveForComputer(char[][] board, int maxDepth) {
-        // TODO You have to write this.
-        // Hint: this will be similar to maxScoreForComputer
-        return -1;
+
+        int depth = 0;
+        char winner = findWinner(board);
+        if (winner == HUMAN) {
+            return -10;
+        } else if (winner == COMPUTER) {
+            return 10;
+        } else if (isFull(board) || (depth == maxDepth)) {
+            return 0;
+        } else {
+            int bestResult = -20;
+            int bestMove = 0;
+            for (int c = 0; c < COLUMNS; c++) {
+                if (isLegalMove(board, c)) {
+                    dropPiece(board, c, COMPUTER);
+                    int result = minScoreForHuman(board, maxDepth, depth + 1);
+                    undoDrop(board, c);
+                    if (result >= bestResult) {
+                        bestResult = result;
+                        bestMove = c;
+                    }
+                }
+            }
+            return bestMove;
+        }
     }
 
     /**
@@ -207,6 +229,7 @@ public class ConnectFour {
             return 0;
         } else {
             int bestResult = -20;
+            int bestMove = 0;
             for (int c = 0; c < COLUMNS; c++) {
                 if (isLegalMove(board, c)) {
                     dropPiece(board, c, COMPUTER);
@@ -214,6 +237,7 @@ public class ConnectFour {
                     undoDrop(board, c);
                     if (result >= bestResult) {
                         bestResult = result;
+                        bestMove = c;
                     }
                 }
             }
