@@ -206,13 +206,13 @@ public class ConnectFour {
         } else if (isFull(board) || (depth == maxDepth)) {
             return 0;
         } else {
-            int bestResult = 20;
+            int bestResult = -20;
             for (int c = 0; c < COLUMNS; c++) {
                 if (isLegalMove(board, c)) {
                     dropPiece(board, c, COMPUTER);
                     int result = minScoreForHuman(board, maxDepth, depth + 1);
                     undoDrop(board, c);
-                    if (result <= bestResult) {
+                    if (result >= bestResult) {
                         bestResult = result;
                     }
                 }
