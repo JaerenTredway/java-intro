@@ -6,22 +6,22 @@
  */
 public class Author {
 
-    //TODO: INSTANCE VARIABLES: ****************************************
+    //INSTANCE MEMBER VARIABLES: ****************************************
     private String givenName;
     private String surname;
     private int birth = AuthorBookConstants.UNKNOWN_YEAR;
     private int death = AuthorBookConstants.UNKNOWN_YEAR;
 
 
-    //TODO: CLASS (STATIC) VARIABLES:***********************************
-    // None so far.
+    //CLASS (STATIC) MEMBER VARIABLES:***********************************
+    //None so far.
 
 
-    //TODO: CONSTRUCTOR: ***********************************************
+    //CONSTRUCTOR: ***********************************************
     /**
-     * Constructor for Author objects
-     * @param givenName
-     * @param surname
+     * Constructor for Author objects.
+     * @param givenName author's first name
+     * @param surname author's last name
      */
     public Author(String givenName, String surname) {
         this.givenName = givenName;
@@ -29,7 +29,11 @@ public class Author {
     }//END Author constructor
 
 
-    //TODO: SETTERS: ****************************************************
+    //SETTERS: ****************************************************
+    /**
+     * Sets the author's birth year.
+     * @param birth int author's birth year
+     */
     public void setLifeRange(int birth) {
         if (birth > -2000 && birth < 2024) {
             this.birth = birth;
@@ -38,6 +42,11 @@ public class Author {
         }
     }
 
+    /**
+     * Overloaded method that sets both author birth year and death year.
+     * @param birth author's birth year
+     * @param death author's death year
+     */
     public void setLifeRange(int birth, int death) {
         if (    (birth > -2000 && birth < 2024) &&
                 (death > -2000 && death < 2024) &&
@@ -50,17 +59,31 @@ public class Author {
     }
 
 
-    //TODO: GETTERS: ****************************************************
+    //GETTERS: ****************************************************
+    /**
+     * Gets author's birth year.
+     * @return int year of birth
+     */
     public int getBirthYear() {
         return birth;
     }
 
+    /**
+     * Gets author's death year.
+     * @return int year of death
+     */
     public int getDeathYear() {
         return death;
     }
 
 
-    //TODO: HELPER METHODS: *********************************************
+    //HELPER METHODS: *********************************************
+    /**
+     * Tests to see if this author name is the same as another author name.
+     * @param other: (Author object) that you are comparing to this Author
+     * @return : (boolean) true if the authors are the same, even if one or
+     * both instances are using initials for the first name.
+     */
     public boolean hasSameName(Author other) {
         boolean sameName = false;
 
@@ -85,14 +108,21 @@ public class Author {
                 sameName = true;
             }
         }
-
         return sameName;
     }
 
+    /**
+     * Makes a String of the author's name.
+     * @return (String): Last Name, First Name
+     */
     public String toString() {
         return surname + ", " + givenName;
     }
 
+    /**
+     * Makes a String with all the available info on the author.
+     * @return (String): Last Name, First Name and (birth-death) if available.
+     */
     public String getInfoString() {
         if ((birth != AuthorBookConstants.UNKNOWN_YEAR) &&
                 (death != AuthorBookConstants.UNKNOWN_YEAR)) {
@@ -105,7 +135,10 @@ public class Author {
         }
     }
 
-    //TODO: main() method ***********************************************
+    /**
+     * Used only for preliminary testing of the Author class.
+     * @param args (String[]): Ignores command line args.
+     */
     public static void main(String[] args) {
         Author sciFi_1 = new Author("William", "Gibson");
         Author sciFi_2 = new Author("Isaac", "Azimov");
@@ -122,6 +155,4 @@ public class Author {
         System.out.println(sciFi_1.getInfoString());
     }
 
-    //TODO: what is an "overloaded method"?
-    //TODO: what is a member variable vs. instance variable?
 }//END Author class
