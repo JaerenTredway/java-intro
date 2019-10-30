@@ -125,8 +125,10 @@ public class ConnectFour {
 
         //eject out of method if there are not 4 spaces total in your chosen
         //direction:
-        if (r + (rowOffset * 3) > ROWS-1 || r + (rowOffset * 3) < 0) return NONE;
-        if (c + (colOffset * 3) > COLUMNS-1 || c + (colOffset * 3) < 0) return NONE;
+        if (r + (rowOffset * 3) > ROWS-1 || r + (rowOffset * 3) < 0)
+            return NONE;
+        if (c + (colOffset * 3) > COLUMNS-1 || c + (colOffset * 3) < 0)
+            return NONE;
 
         char startVal = board[r][c];
 
@@ -182,30 +184,23 @@ public class ConnectFour {
      */
     public static int bestMoveForComputer(char[][] board, int maxDepth) {
 
+        //start the depth at zero, then it will go up to maxDepth:
         int depth = 0;
-        char winner = findWinner(board);
-        if (winner == HUMAN) {
-            return -10;
-        } else if (winner == COMPUTER) {
-            return 10;
-        } else if (isFull(board) || (depth == maxDepth)) {
-            return 0;
-        } else {
-            int bestResult = -20;
-            int bestMove = 0;
-            for (int c = 0; c < COLUMNS; c++) {
-                if (isLegalMove(board, c)) {
-                    dropPiece(board, c, COMPUTER);
-                    int result = minScoreForHuman(board, maxDepth, depth + 1);
-                    undoDrop(board, c);
-                    if (result >= bestResult) {
-                        bestResult = result;
-                        bestMove = c;
-                    }
+        int bestScore = -20;
+        int bestMove = 0;
+
+        for (int c = 0; c < COLUMNS; c++) {
+            if (isLegalMove(board, c)) {
+                dropPiece(board, c, COMPUTER);
+                int thisColumnScore = minScoreForHuman(board, maxDepth, depth);
+                undoDrop(board, c);
+                if (thisColumnScore > bestScore) {
+                    bestScore = thisColumnScore;
+                    bestMove = c;
                 }
             }
-            return bestMove;
         }
+        return bestMove;
     }
 
     /**
@@ -218,7 +213,8 @@ public class ConnectFour {
      * @param maxDepth Maximum search depth.
      * @param depth Current search depth.
      */
-    public static int maxScoreForComputer(char[][] board, int maxDepth, int depth) {
+    public static int maxScoreForComputer(char[][] board, int maxDepth,
+                                       int depth) {
 
         char winner = findWinner(board);
         if (winner == HUMAN) {
@@ -228,20 +224,19 @@ public class ConnectFour {
         } else if (isFull(board) || (depth == maxDepth)) {
             return 0;
         } else {
-            int bestResult = -20;
-            int bestMove = 0;
+            int bestScore = -20;
             for (int c = 0; c < COLUMNS; c++) {
                 if (isLegalMove(board, c)) {
                     dropPiece(board, c, COMPUTER);
-                    int result = minScoreForHuman(board, maxDepth, depth + 1);
+                    int thisColumnScore =
+                            minScoreForHuman(board, maxDepth, depth + 1);
                     undoDrop(board, c);
-                    if (result >= bestResult) {
-                        bestResult = result;
-                        bestMove = c;
+                    if (thisColumnScore > bestScore) {
+                        bestScore = thisColumnScore;
                     }
                 }
             }
-            return bestResult;
+            return bestScore;
         }
     }
 
@@ -256,8 +251,8 @@ public class ConnectFour {
      * @param maxDepth Maximum search depth.
      * @param depth Current search depth.
      */
-    public static int minScoreForHuman(char[][] board, int maxDepth, int depth) {
-
+    public static int minScoreForHuman(char[][] board, int maxDepth,
+                                       int depth) {
         // First, see if anyone is winning already
         char winner = findWinner(board);
         if (winner == COMPUTER) {
@@ -288,18 +283,19 @@ public class ConnectFour {
                     // This column is a legal move. We'll drop a piece
                     // there so we can see how good it is.
                     dropPiece(board, c, HUMAN);
-                    // Call maxScoreForComputer to see what the value would be for the
-                    // computer's best play. The maxScoreForComputer method will end
-                    // up calling minScoreForHuman in a similar fashion in order to
-                    // figure out the best result for the computer's
-                    // turn, assuming the human will play perfectly in
-                    // response.
-                    int result = maxScoreForComputer(board, maxDepth, depth + 1);
+                    // Call maxScoreForComputer to see what the value would be
+                    // for the computer's best play. The maxScoreForComputer
+                    // method will end up calling minScoreForHuman in a
+                    // similar fashion in order to figure out the best result
+                    // for the computer's turn, assuming the human will play
+                    // perfectly in response.
+                    int result = maxScoreForComputer(board, maxDepth,
+                            depth + 1);
                     // Now that we have the result, undo the drop so
                     // the board will be like it was before.
                     undoDrop(board, c);
 
-                    if (result <= bestResult) {
+                    if (result < bestResult) {
                         // We've found a new best score. Remember it.
                         bestResult = result;
                     }

@@ -47,9 +47,6 @@ public class ConnectFourTest {
             ".......\n" +
             ".......\n";
         countTest(ConnectFour.boardToString(board).equals(emptyBoardStr));
-        if (ConnectFour.boardToString(board).equals(emptyBoardStr)) {
-            System.out.println("boardToString(empty): passed");
-        }
 
         board[0][2] = ConnectFour.HUMAN;
         board[1][2] = ConnectFour.COMPUTER;
@@ -61,13 +58,6 @@ public class ConnectFourTest {
             "..X....\n" +
             "..O....\n";
         countTest(ConnectFour.boardToString(board).equals(boardStr));
-        if (ConnectFour.boardToString(board).equals(boardStr)) {
-            System.out.println("boardToString(modified): passed");
-        }
-
-        //display boardToString result:
-        System.out.println(ConnectFour.boardToString(board));
-
     }
 
     public static void testGetOpposite() {
@@ -82,8 +72,7 @@ public class ConnectFourTest {
         countTest(ConnectFour.NONE == board[1][2]);
         countTest(ConnectFour.NONE == board[0][1]);
         countTest(ConnectFour.NONE == board[0][3]);
-        //display boardToString result:
-        System.out.println(ConnectFour.boardToString(board));
+
         ConnectFour.dropPiece(board, 2, ConnectFour.HUMAN);
         countTest(ConnectFour.HUMAN == board[1][2]);
         countTest(ConnectFour.COMPUTER == board[0][2]);
@@ -94,8 +83,6 @@ public class ConnectFourTest {
                                                           ".......\n" +
                                                           "..O....\n" +
                                                           "..X....\n"));
-        //display boardToString result:
-        System.out.println(ConnectFour.boardToString(board));
     }
 
 
@@ -251,9 +238,6 @@ public class ConnectFourTest {
         }
         // Human can win in three moves
         countTest(-10 == ConnectFour.minScoreForHuman(board, 3, 0));
-        if (ConnectFour.minScoreForHuman(board, 3, 0) == -10) {
-            System.out.println("testMin passed");
-        }
     }
 
     public static void testBestMoveForComputer() {
@@ -282,7 +266,6 @@ public class ConnectFourTest {
                                                           ".......\n" +
                                                           "XXX....\n" +
                                                           "OXO..XX\n"));
-
 
         // Computer 4 forces human to block at 3, but then computer wins at 3
         // OR Computer 3 forces human to block at 3 or 4, computer still wins
