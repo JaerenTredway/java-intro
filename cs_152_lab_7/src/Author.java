@@ -9,8 +9,8 @@ public class Author {
     //TODO: INSTANCE VARIABLES: ****************************************
     private String givenName;
     private String surname;
-    private int birth;
-    private int death;
+    private int birth = AuthorBookConstants.UNKNOWN_YEAR;
+    private int death = AuthorBookConstants.UNKNOWN_YEAR;
 
 
     //TODO: CLASS (STATIC) VARIABLES:***********************************
@@ -39,8 +39,11 @@ public class Author {
     }
 
     public void setLifeRange(int birth, int death) {
-        if ((birth > -2000 && birth < 2024) && (birth < death)) {
+        if (    (birth > -2000 && birth < 2024) &&
+                (death > -2000 && death < 2024) &&
+                (birth < death)) {
             this.birth = birth;
+            this.death = death;
         } else {
             System.out.println("Invalid birth and/or death year");
         }
@@ -86,13 +89,21 @@ public class Author {
         return sameName;
     }
 
-//    public String toString() {
-//
-//    }
-//
-//    public String getInfoString() {
-//
-//    }
+    public String toString() {
+        return surname + ", " + givenName;
+    }
+
+    public String getInfoString() {
+        if ((birth != AuthorBookConstants.UNKNOWN_YEAR) &&
+                (death != AuthorBookConstants.UNKNOWN_YEAR)) {
+            return surname + ", " + givenName + " (" + birth + "-" + death +
+                    ")";
+        } else if (birth != AuthorBookConstants.UNKNOWN_YEAR) {
+            return surname + ", " + givenName + " (born " + birth + ")";
+        } else {
+            return surname + ", " + givenName;
+        }
+    }
 
     //TODO: main() method ***********************************************
     public static void main(String[] args) {
@@ -105,12 +116,11 @@ public class Author {
         System.out.println(sciFi_3.givenName + " " + sciFi_3.surname);
 
         System.out.println(sciFi_1.hasSameName(sciFi_3));
-
-        sciFi_1.setLifeRange(1980, 2020);
-
-
+        sciFi_1.setLifeRange(1960, 2020);
+        System.out.println("birth = " + sciFi_1.birth);
+        System.out.println("death = " + sciFi_1.death);
+        System.out.println(sciFi_1.getInfoString());
     }
-
 
     //TODO: what is an "overloaded method"?
     //TODO: what is a member variable vs. instance variable?
