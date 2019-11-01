@@ -1,6 +1,6 @@
 /**
- * This class builds an Author object with a first name, surname, birth year and
- * death year
+ * This class builds an Author object that can have a first name, surname,
+ *      birth year and death year
  * @author Jaeren W. Tredway
  * @version 1.0
  */
@@ -20,19 +20,19 @@ public class Author {
     //CONSTRUCTOR: ***********************************************
     /**
      * Constructor for Author objects.
-     * @param givenName author's first name
-     * @param surname author's last name
+     * @param givenName (String): author's first name
+     * @param surname (String): author's last name
      */
     public Author(String givenName, String surname) {
         this.givenName = givenName;
         this.surname = surname;
-    }//END Author constructor
+    }
 
 
     //SETTERS: ****************************************************
     /**
      * Sets the author's birth year.
-     * @param birth int author's birth year
+     * @param birth (int): author's birth year
      */
     public void setLifeRange(int birth) {
         if (birth > -2000 && birth < 2024) {
@@ -44,8 +44,8 @@ public class Author {
 
     /**
      * Overloaded method that sets both author birth year and death year.
-     * @param birth author's birth year
-     * @param death author's death year
+     * @param birth (int): author's birth year
+     * @param death (int): author's death year
      */
     public void setLifeRange(int birth, int death) {
         if (    (birth > -2000 && birth < 2024) &&
@@ -62,7 +62,7 @@ public class Author {
     //GETTERS: ****************************************************
     /**
      * Gets author's birth year.
-     * @return int year of birth
+     * @return (int): year of birth
      */
     public int getBirthYear() {
         return birth;
@@ -70,7 +70,7 @@ public class Author {
 
     /**
      * Gets author's death year.
-     * @return int year of death
+     * @return (int): year of death
      */
     public int getDeathYear() {
         return death;
@@ -80,9 +80,10 @@ public class Author {
     //HELPER METHODS: *********************************************
     /**
      * Tests to see if this author name is the same as another author name.
-     * @param other: (Author object) that you are comparing to this Author
+     * @param other (Author object): author that you are comparing to this
+     *      author
      * @return : (boolean) true if the authors are the same, even if one or
-     * both instances are using initials for the first name.
+     *      both instances are using initials for the first name.
      */
     public boolean hasSameName(Author other) {
         boolean sameName = false;
@@ -136,7 +137,7 @@ public class Author {
     }
 
     /**
-     * Used only for preliminary testing of the Author class.
+     * main() used for preliminary testing of the Author class.
      * @param args (String[]): Ignores command line args.
      */
     public static void main(String[] args) {
@@ -153,6 +154,6 @@ public class Author {
         System.out.println("birth = " + sciFi_1.birth);
         System.out.println("death = " + sciFi_1.death);
         System.out.println(sciFi_1.getInfoString());
-    }
+    }//END main()
 
 }//END Author class
