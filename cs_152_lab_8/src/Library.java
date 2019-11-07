@@ -1,7 +1,7 @@
 public class Library {
 
     /** Unique books in the library. */
-    private Book[] books;
+    public Book[] books;
 
     /** Number of copies for each book. */
     private int[] copies;
@@ -26,7 +26,13 @@ public class Library {
      * @return Total number of copies in the library.
      */
     public int getTotalCopies() {
-        return -1;
+        int totalCopies = 0;
+
+        for (int i = 0; i < copies.length; i++) {
+            totalCopies += copies[i];
+        }
+
+        return totalCopies;
     }
 
     /**
@@ -34,7 +40,14 @@ public class Library {
      * @return Total number of copies checked out.
      */
     public int getNumCheckedOut() {
-        return -1;
+        int totalCopies = getTotalCopies();
+        int totalCheckedIn = 0;
+
+        for (int i = 0; i < checkedIn.length; i++) {
+            totalCheckedIn += checkedIn[i];
+        }
+
+        return totalCopies - totalCheckedIn;
     }
 
     /**
@@ -42,8 +55,14 @@ public class Library {
      * @return Status string.
      */
     public String getStatus() {
-        return "";
+        String result =
+                "Total unique books: " + numBooks + "\n" +
+                "Total number of copies: " + getTotalCopies() + "\n" +
+                "Total checked out: " + getNumCheckedOut();
+
+        return result;
     }
+
 
     /**
      * Add a single book to the library, on the shelf.
@@ -53,7 +72,40 @@ public class Library {
      * @param b Book to add.
      */
     public void addBook( Book b ) {
+        boolean alreadyInLibrary = false;
+
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) {
+                break;
+            } else if (b.equals(books[i])) {
+                copies[i]++;
+                alreadyInLibrary = true;
+                break;
+            }
+        }
+
+        if (!alreadyInLibrary) {
+            //make bigger arrays and copy the old data over:
+            Book[] biggerBooks = new Book[books.length+1];
+            int[] biggerCopies = new int[books.length+1];
+            int[] biggerCheckedIn = new int[books.length+1];
+            for (int i = 0; i < books.length; i++) {
+                biggerBooks[i] = books[i];
+                biggerCopies[i] = copies[i];
+                biggerCheckedIn[i] = checkedIn[i];
+            }
+            //add the new book:
+            int lastIndex = biggerBooks.length-1;
+            biggerBooks[lastIndex] = b;
+            biggerCopies[lastIndex] = 1;
+            biggerCheckedIn[lastIndex] = 1;
+            //point back to the original array names:
+            books = biggerBooks;
+            copies = biggerCopies;
+            checkedIn = biggerCheckedIn;
+        }
     }
+
 
     /**
      * Add all the books in the array to the library. Adds one copy of
@@ -61,6 +113,11 @@ public class Library {
      * @param newBooks Books to add.
      */
     public void addBooks( Book[] newBooks ) {
+        for (int i = 0; i < newBooks.length; i++) {
+            books[i] = newBooks[i];
+            copies[i] = 1;
+            checkedIn[i] = 1;
+        }
     }
 
     /**

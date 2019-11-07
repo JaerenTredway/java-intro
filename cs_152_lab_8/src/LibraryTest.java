@@ -7,13 +7,19 @@ public class LibraryTest {
 
         System.out.println( "Let's calculate some facts about the library..." );
 
+        System.out.println(library.getTotalCopies());
+
         if( library.getTotalCopies() == 0 ) { tScore++; }
         System.out.println( " - getTotalCopies works for empty library: " + tScore + "/1" );
         score += tScore; tScore = 0;
 
+        System.out.println(library.getNumCheckedOut());
+
         if( library.getNumCheckedOut() == 0 ) { tScore++; }
         System.out.println( " - getNumCheckedOut works for empty library: " + tScore + "/1" );
         score += tScore; tScore = 0;
+
+        System.out.println(library.getStatus());
 
         if( library.getStatus().equals( "Total unique books: 0\n"+
                                         "Total number of copies: 0\n"+
@@ -78,7 +84,8 @@ public class LibraryTest {
 
         library.addBooks( libraryBooks );
 
-
+        System.out.println(library.books[1].getTitle());
+        System.out.println("****total books added = " + library.getTotalCopies());
 
         System.out.println( "Let's add a set of books, and add more books..." );
 
