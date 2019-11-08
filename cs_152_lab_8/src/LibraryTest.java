@@ -1,25 +1,25 @@
 public class LibraryTest {
 
     public static void main(String[] args) {
-        Library library = new Library(400);
+        Library library = new Library(50);
         int score = 0;
         int tScore = 0;
 
         System.out.println( "Let's calculate some facts about the library..." );
 
-        System.out.println(library.getTotalCopies());
+        //System.out.println(library.getTotalCopies());
 
         if( library.getTotalCopies() == 0 ) { tScore++; }
         System.out.println( " - getTotalCopies works for empty library: " + tScore + "/1" );
         score += tScore; tScore = 0;
 
-        System.out.println(library.getNumCheckedOut());
+        //System.out.println(library.getNumCheckedOut());
 
         if( library.getNumCheckedOut() == 0 ) { tScore++; }
         System.out.println( " - getNumCheckedOut works for empty library: " + tScore + "/1" );
         score += tScore; tScore = 0;
 
-        System.out.println(library.getStatus());
+        //System.out.println(library.getStatus());
 
         if( library.getStatus().equals( "Total unique books: 0\n"+
                                         "Total number of copies: 0\n"+
@@ -84,7 +84,7 @@ public class LibraryTest {
 
         library.addBooks( libraryBooks );
 
-        System.out.println(library.books[1].getTitle());
+//        System.out.println(library.books[1].getTitle());
         System.out.println("****total books added = " + library.getTotalCopies());
 
         System.out.println( "Let's add a set of books, and add more books..." );
@@ -150,6 +150,8 @@ public class LibraryTest {
                                         "Total checked out: 0" ) ) { tScore++; }
         System.out.println( " - getStatus works after adding books: " + tScore + "/1\n" );
         score += tScore; tScore = 0;
+
+        System.out.println("new status: " + library.getStatus());
 
         System.out.println( "Let's try checking out books..." );
 

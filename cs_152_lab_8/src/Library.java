@@ -30,8 +30,8 @@ public class Library {
 
         for (int i = 0; i < copies.length; i++) {
             totalCopies += copies[i];
+            //System.out.println("copies " + i + ": " + copies[i]);
         }
-
         return totalCopies;
     }
 
@@ -74,37 +74,37 @@ public class Library {
     public void addBook( Book b ) {
         boolean alreadyInLibrary = false;
 
+        //search if you already have this book:
         for (int i = 0; i < books.length; i++) {
+            //if you reached the end of the books, stop looking:
             if (books[i] == null) {
                 break;
+            //if you already have this book in your library, add a copy:
             } else if (b.equals(books[i])) {
                 copies[i]++;
+                checkedIn[i]++;
+                //numBooks++; >>this is not a new copy
                 alreadyInLibrary = true;
                 break;
             }
         }
 
+        //if you don't have this book yet, add it to the first available
+        // space in your library:
         if (!alreadyInLibrary) {
-            //make bigger arrays and copy the old data over:
-            Book[] biggerBooks = new Book[books.length+1];
-            int[] biggerCopies = new int[books.length+1];
-            int[] biggerCheckedIn = new int[books.length+1];
             for (int i = 0; i < books.length; i++) {
-                biggerBooks[i] = books[i];
-                biggerCopies[i] = copies[i];
-                biggerCheckedIn[i] = checkedIn[i];
+                if (books[i] == null) {
+                    books[i] = b;
+                    copies[i] = 1;
+                    checkedIn[i] = 1;
+                    numBooks++;
+                    System.out.println("new book = " + b.getTitle());
+                    System.out.println("added book = " + books[i].getTitle());
+                    break;
+                }
             }
-            //add the new book:
-            int lastIndex = biggerBooks.length-1;
-            biggerBooks[lastIndex] = b;
-            biggerCopies[lastIndex] = 1;
-            biggerCheckedIn[lastIndex] = 1;
-            //point back to the original array names:
-            books = biggerBooks;
-            copies = biggerCopies;
-            checkedIn = biggerCheckedIn;
         }
-    }
+    }//END of addBook() (Adds single book)*******************************
 
 
     /**
@@ -113,12 +113,21 @@ public class Library {
      * @param newBooks Books to add.
      */
     public void addBooks( Book[] newBooks ) {
-        for (int i = 0; i < newBooks.length; i++) {
-            books[i] = newBooks[i];
-            copies[i] = 1;
-            checkedIn[i] = 1;
+        //find first empty position on bookshelf:
+        int startPosition = 0;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) {
+                startPosition = i;
+                break;
+            }
         }
-    }
+        //add the newBooks starting at startPosition:
+        for (int i = startPosition; i < startPosition + newBooks.length; i++) {
+            addBook(newBooks[i-startPosition]);
+        }
+
+    }//END of addBooks() (Adds array of books)****************************
+
 
     /**
      * Checks out a book from the library if possible.
