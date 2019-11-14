@@ -30,7 +30,6 @@ public class Library {
 
         for (int i = 0; i < copies.length; i++) {
             totalCopies += copies[i];
-            //System.out.println("copies " + i + ": " + copies[i]);
         }
         return totalCopies;
     }
@@ -83,7 +82,7 @@ public class Library {
             } else if (b.equals(books[i])) {
                 copies[i]++;
                 checkedIn[i]++;
-                //numBooks++; >>this is not a new copy
+                //don't numBooks++ ,this is not a new title
                 alreadyInLibrary = true;
                 break;
             }
@@ -98,8 +97,6 @@ public class Library {
                     copies[i] = 1;
                     checkedIn[i] = 1;
                     numBooks++;
-//                    System.out.println("new book = " + b.getTitle());
-//                    System.out.println("added book = " + books[i].getTitle());
                     break;
                 }
             }
@@ -146,17 +143,13 @@ public class Library {
             }
 
             if (books[i].equals(b)) {
-                //System.out.println("\nSquaaAAAKK!ONE\n");
                 if (checkedIn[i] >= 1) {
-                    //System.out.println("\nSquaaAAAKK!TWO\n");
                     action = "Checked out!";
                     checkedIn[i] = checkedIn[i] - 1;
                 } else {
-                    //System.out.println("\nSquaaAAAKK!THREE\n");
                     action = "All out of copies.";
                 }
             }
-            //System.out.println(getStatus());
         }
 
         return action;
@@ -206,7 +199,6 @@ public class Library {
                     "\nTotal number of copies: " + getTotalCopies() +
                     "\nTotal checked out: " + getNumCheckedOut();
 
-        System.out.println(output);
         return output;
     }
 
@@ -220,14 +212,13 @@ public class Library {
         int counter = 0;
 
         for (int i = 0; i < numBooks; i++) {
-
             if (books[i].getAuthor().hasSameName(a)) {
-                System.out.println("Target: " + a.toString() + "/ located: " + books[i].getAuthor() +
-                        "**********\n");
+//                System.out.println("Target: " + a.toString() + "/ located:
+//                 " + books[i].getAuthor() +
+//                        "**********\n");
                 counter++;
             }
         }
-
         return counter;
     }
 
@@ -241,11 +232,31 @@ public class Library {
      * @return String listing books by the author.
      */
     public String listBooksByAuthor( Author a ) {
-        return "";
-    }
+        String output = "";
+        boolean hasSomeBooks = false;
+
+        for (int i = 0; i < numBooks; i++) {
+            String targetAuthor = books[i].getAuthor().toString();
+
+            if (targetAuthor.equals(a.toString())) {
+                output += books[i].getTitle() + ". " +
+                        books[i].getAuthor() + ".\n";
+                hasSomeBooks = true;
+            }
+        }
+
+        if (!hasSomeBooks) {
+            //System.out.println("SQWaaAAK!");
+            output = "No books by " + a.toString() + ".";
+        }
+
+        return output;
+
+    }//END listBooksByAuthor()
+
 
     /**
-     * Returns string that lists the unique books with contain the
+     * Returns string that lists the unique books which contain the
      * given string within their titles, without regard for case, with
      * a newline after each.  If no books are found containing the
      * string, returns string that says so.
@@ -253,7 +264,25 @@ public class Library {
      * @return String listing books that contain given string in titles.
      */
     public String listBooksByTitle( String s ) {
-        return "";
+        String output = "";
+        boolean foundSome = false;
+
+        for (int i = 0; i < numBooks; i++) {
+            String targetBook = books[i].getTitle().toLowerCase();
+//            System.out.println(targetBook);
+//            System.out.println(targetBook.contains(s.toLowerCase()));
+            if (targetBook.contains(s.toLowerCase())) {
+                output += books[i].getTitle() +
+                        ". " + books[i].getAuthor() + ".\n";
+                foundSome = true;
+            }
+        }
+
+        if (!foundSome) {
+            output = "No books with \"" + s + "\" in the title.";
+        }
+        System.out.println(s + " output: " + output);
+        return output;
     }
 
     /**
