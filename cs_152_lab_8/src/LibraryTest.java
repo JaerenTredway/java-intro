@@ -1,7 +1,7 @@
 public class LibraryTest {
 
     public static void main(String[] args) {
-        Library library = new Library(50);
+        Library library = new Library(90);
         int score = 0;
         int tScore = 0;
 

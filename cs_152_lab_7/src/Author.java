@@ -97,16 +97,20 @@ public class Author {
         //test if first initials (no period) and last names match:
         if (this.givenName.length() == 1 || other.givenName.length() == 1) {
             if (this.givenName.charAt(0) == other.givenName.charAt(0)) {
-                sameName = true;
+                if (this.surname.equals(other.surname)) {
+                    sameName = true;
+                }
             }
         }
         //test if first initials (followed by period) and last names match:
         if (this.givenName.length() > 1 && other.givenName.length() > 1) {
             if (
-                (this.givenName.charAt(0) == other.givenName.charAt(0)) &&
-                (this.givenName.charAt(1) == '.' || other.givenName.charAt(1)
-                        == '.')) {
-                sameName = true;
+                    (this.givenName.charAt(0) == other.givenName.charAt(0)) &&
+                            (this.givenName.charAt(1) == '.' || other.givenName.charAt(1)
+                                    == '.')) {
+                if (this.surname.equals(other.surname)) {
+                    sameName = true;
+                }
             }
         }
         return sameName;
