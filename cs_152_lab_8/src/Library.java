@@ -213,9 +213,6 @@ public class Library {
 
         for (int i = 0; i < numBooks; i++) {
             if (books[i].getAuthor().hasSameName(a)) {
-//                System.out.println("Target: " + a.toString() + "/ located:
-//                 " + books[i].getAuthor() +
-//                        "**********\n");
                 counter++;
             }
         }
@@ -246,7 +243,6 @@ public class Library {
         }
 
         if (!hasSomeBooks) {
-            //System.out.println("SQWaaAAK!");
             output = "No books by " + a.toString() + ".";
         }
 
@@ -269,8 +265,7 @@ public class Library {
 
         for (int i = 0; i < numBooks; i++) {
             String targetBook = books[i].getTitle().toLowerCase();
-//            System.out.println(targetBook);
-//            System.out.println(targetBook.contains(s.toLowerCase()));
+
             if (targetBook.contains(s.toLowerCase())) {
                 output += books[i].getTitle() +
                         ". " + books[i].getAuthor() + ".\n";
@@ -281,9 +276,10 @@ public class Library {
         if (!foundSome) {
             output = "No books with \"" + s + "\" in the title.";
         }
-        System.out.println(s + " output: " + output);
+
         return output;
     }
+
 
     /**
      * Deletes book entirely from the library.
@@ -291,8 +287,38 @@ public class Library {
      * @return String denoting success or failure.
      */
     public String deleteBook( Book b ) {
-        // This method is for optional bonus points.
-        return "";
+        String output = "";
+        int flaggedForDeletion = -1;
+        boolean foundBook = false;
+
+        //search to find the book that is to be deleted:
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].equals(b)) {
+                flaggedForDeletion = i;
+                output = "Book removed.";
+                foundBook = true;
+                System.out.println("book index to delete: " + i);
+                break;
+            }
+        }
+
+        if (!foundBook) {
+            output = "Book not found.";
+        }
+
+        //clean up arrays by overwriting deleted book:
+        if (foundBook) {
+            for (int i = flaggedForDeletion; i < numBooks; i++) {
+                books[i] = books[i+1];
+                copies[i] = copies[i+1];
+                checkedIn[i] = checkedIn[i+1];
+            }
+            numBooks--;
+        }
+
+        System.out.println(output + "\n");
+
+        return output;
     }
 
 }
