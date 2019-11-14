@@ -21,7 +21,10 @@ public class Book {
      *  This is the constructor if no arguments are provided.
      */
     public Book() {
+        this.date = AuthorBookConstants.UNKNOWN_YEAR;
         this.title = AuthorBookConstants.UNKNOWN_TITLE;
+        this.isbn = AuthorBookConstants.UNKNOWN_ISBN;
+        this.author = AuthorBookConstants.UNKNOWN_AUTHOR;
     }
 
     /**
@@ -29,7 +32,11 @@ public class Book {
      * @param title (String): The name of the book.
      */
     public Book(String title) {
+        this.date = AuthorBookConstants.UNKNOWN_YEAR;
         this.title = title;
+        this.isbn = AuthorBookConstants.UNKNOWN_ISBN;
+        this.author = AuthorBookConstants.UNKNOWN_AUTHOR;
+
     }
 
     /**
@@ -38,7 +45,9 @@ public class Book {
      * @param author (String): The name of the author.
      */
     public Book(String title, Author author) {
+        this.date = AuthorBookConstants.UNKNOWN_YEAR;
         this.title = title;
+        this.isbn = AuthorBookConstants.UNKNOWN_ISBN;
         this.author = author;
     }
 
@@ -145,11 +154,15 @@ public class Book {
      *      otherwise.
      */
     public boolean equals(Book other) {
-        if (this.isbn.equals(other.isbn)) {
-            return true;
-        } else {
+        //filter out failures caused by no ISBN having been assigned to one
+        //or both books:
+        if (this.isbn.equals(AuthorBookConstants.UNKNOWN_ISBN) ||
+            other.isbn.equals(AuthorBookConstants.UNKNOWN_ISBN)) {
+            System.out.println("Error: One or more books in your search have " +
+                    "no ISBN assigned.");
             return false;
         }
+        return this.isbn.equals(other.isbn);
     }
 
     /**

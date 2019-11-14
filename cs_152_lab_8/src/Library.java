@@ -98,8 +98,8 @@ public class Library {
                     copies[i] = 1;
                     checkedIn[i] = 1;
                     numBooks++;
-                    System.out.println("new book = " + b.getTitle());
-                    System.out.println("added book = " + books[i].getTitle());
+//                    System.out.println("new book = " + b.getTitle());
+//                    System.out.println("added book = " + books[i].getTitle());
                     break;
                 }
             }
@@ -125,7 +125,6 @@ public class Library {
         for (int i = startPosition; i < startPosition + newBooks.length; i++) {
             addBook(newBooks[i-startPosition]);
         }
-
     }//END of addBooks() (Adds array of books)****************************
 
 
@@ -135,8 +134,34 @@ public class Library {
      * @return String denoting success or failure.
      */
     public String checkOut ( Book b ) {
-        return "";
+        String action = "Book not found.";
+
+        for (int i = 0; i < numBooks; i++) {
+            //eject out of this method if either book involved is null:
+            if (books[i] == null) {
+                System.out.println("One or more books are missing, action " +
+                        "terminated");
+                //eject:
+                return action;
+            }
+
+            if (books[i].equals(b)) {
+                //System.out.println("\nSquaaAAAKK!ONE\n");
+                if (checkedIn[i] >= 1) {
+                    //System.out.println("\nSquaaAAAKK!TWO\n");
+                    action = "Checked out!";
+                    checkedIn[i] = checkedIn[i] - 1;
+                } else {
+                    //System.out.println("\nSquaaAAAKK!THREE\n");
+                    action = "All out of copies.";
+                }
+            }
+            //System.out.println(getStatus());
+        }
+
+        return action;
     }
+
 
     /**
      * Checks in a book to the library if possible.
@@ -144,16 +169,47 @@ public class Library {
      * @return String denoting success or failure.
      */
     public String checkIn ( Book b ) {
-        return "";
+        String action = "";
+
+        for (int i = 0; i < numBooks; i++) {
+
+            if (books[i].equals(b) && checkedIn[i] < copies[i]) {
+                checkedIn[i]++;
+                action = "Checked in!";
+                break;
+            } else if (books[i].equals(b) && (checkedIn[i] == copies[i])) {
+                action = "All of our copies are already checked in.";
+                break;
+            } else {
+                action = "Book not found.";
+            }
+        }
+
+        return action;
     }
+
 
     /**
      * Get string representation of entire library collection and status.
      * @return String representation of library.
      */
     public String toString() {
-        return "";
+        String output = "";
+
+        for (int i = 0; i < numBooks; i++) {
+            output += i + ". " +
+                    books[i].getTitle() +
+                    ". " + books[i].getAuthor() + ". : " +
+                    checkedIn[i] + "/" + copies[i] + "\n";
+        }
+        output +=   "\nTotal unique books: " + numBooks +
+                    "\nTotal number of copies: " + getTotalCopies() +
+                    "\nTotal checked out: " + getNumCheckedOut();
+
+        System.out.println(output);
+        return output;
     }
+
 
     /**
      * Get number of unique books that exist for a given author.
@@ -161,7 +217,18 @@ public class Library {
      * @return Number of books by the author.
      */
     public int numBooksByAuthor( Author a ) {
-        return -1;
+        int counter = 0;
+
+        for (int i = 0; i < numBooks; i++) {
+
+            if (books[i].getAuthor().hasSameName(a)) {
+                System.out.println("Target: " + a.toString() + "/ located: " + books[i].getAuthor() +
+                        "**********\n");
+                counter++;
+            }
+        }
+
+        return counter;
     }
 
     /**
