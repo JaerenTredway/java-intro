@@ -1,7 +1,7 @@
 public class Library {
 
     /** Unique books in the library. */
-    public Book[] books;
+    private Book[] books;
 
     /** Number of copies for each book. */
     private int[] copies;
@@ -101,7 +101,7 @@ public class Library {
                 }
             }
         }
-    }//END of addBook() (Adds single book)*******************************
+    }//END of addBook()
 
 
     /**
@@ -122,7 +122,7 @@ public class Library {
         for (int i = startPosition; i < startPosition + newBooks.length; i++) {
             addBook(newBooks[i-startPosition]);
         }
-    }//END of addBooks() (Adds array of books)****************************
+    }//END of addBooks()
 
 
     /**
@@ -151,7 +151,6 @@ public class Library {
                 }
             }
         }
-
         return action;
     }
 
@@ -261,7 +260,7 @@ public class Library {
      */
     public String listBooksByTitle( String s ) {
         String output = "";
-        boolean foundSome = false;
+        boolean foundSomeBooks = false;
 
         for (int i = 0; i < numBooks; i++) {
             String targetBook = books[i].getTitle().toLowerCase();
@@ -269,11 +268,11 @@ public class Library {
             if (targetBook.contains(s.toLowerCase())) {
                 output += books[i].getTitle() +
                         ". " + books[i].getAuthor() + ".\n";
-                foundSome = true;
+                foundSomeBooks = true;
             }
         }
 
-        if (!foundSome) {
+        if (!foundSomeBooks) {
             output = "No books with \"" + s + "\" in the title.";
         }
 
@@ -295,9 +294,7 @@ public class Library {
         for (int i = 0; i < numBooks; i++) {
             if (books[i].equals(b)) {
                 flaggedForDeletion = i;
-                output = "Book removed.";
                 foundBook = true;
-                System.out.println("book index to delete: " + i);
                 break;
             }
         }
@@ -314,11 +311,10 @@ public class Library {
                 checkedIn[i] = checkedIn[i+1];
             }
             numBooks--;
+            output = "Book removed.";
         }
-
-        System.out.println(output + "\n");
 
         return output;
     }
 
-}
+}//END of class Library

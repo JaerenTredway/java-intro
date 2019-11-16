@@ -283,8 +283,17 @@ public class LibraryTest {
 
         System.out.println( "Bonus! Let's remove a book from the library forever..." );
 
+        System.out.println("book to remove: " + b1);
+        System.out.println("start:\n" + library.getStatus());
+        System.out.println(library.toString());
+
         if( library.deleteBook( b1 ).equals( "Book removed." ) ) { tScore+=1; }
         if( library.deleteBook( b3 ).equals( "Book not found." ) ) { tScore+=1; }
+
+        System.out.println("book to remove: " + b1);
+        System.out.println("*******" + library.getStatus());
+        System.out.println(library.toString());
+
         if( library.getStatus().equals( "Total unique books: 30\n"+
                                         "Total number of copies: 44\n"+
                                         "Total checked out: 3" ) ) { tScore+=1; }
