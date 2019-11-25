@@ -9,9 +9,11 @@ public class Deck {
     /** *****************************************************************
      * This is the constructor that builds a deck of cards.
      * The bottom card in the deck wil be stored at index zero in the array.
+     * "deck" here refers to both the entire deck, and each pile of cards
+     * during gameplay.
      */
     public Deck() {
-        deck = new Card[TOTAL_DECK_SIZE];
+        this.deck = new Card[TOTAL_DECK_SIZE];
         subDeckSize = 0;
     }//******************************************************************
 
@@ -27,6 +29,9 @@ public class Deck {
 
     /** *****************************************************************
      * Fills the deck with all the cards in a standard deck of cards.
+     * TODO: You should not explicitly construct and add all 52 possible cards.
+     * Use methods provided in the RANK and SUIT enums to examine all the
+     * possible combinations.
      */
     public void fill() {
         //TODO
@@ -70,6 +75,7 @@ public class Deck {
      * @return (type int): the number of cards
      */
     public int size() {
+        return 0;
         //TODO
     }//******************************************************************
 
@@ -80,6 +86,7 @@ public class Deck {
      * @return
      */
     public Card getTopCard() {
+        return null;
         //TODO
     }//******************************************************************
 
