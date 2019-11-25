@@ -1,3 +1,8 @@
+/**
+ * @version 1.0 2019-11-25
+ * @author Jaeren William Tredway
+ * This class builds a deck of cards and provides methods for decks.
+ */
 public class Deck {
 
     public static final int TOTAL_DECK_SIZE = 52;
@@ -10,11 +15,11 @@ public class Deck {
      * This is the constructor that builds a deck of cards.
      * The bottom card in the deck wil be stored at index zero in the array.
      * "deck" here refers to both the entire deck, and each pile of cards
-     * during gameplay.
+     * during game play.
      */
     public Deck() {
         this.deck = new Card[TOTAL_DECK_SIZE];
-        subDeckSize = 0;
+        this.subDeckSize = 0;
     }//******************************************************************
 
 

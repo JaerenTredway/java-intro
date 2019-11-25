@@ -1,6 +1,8 @@
 /**
+ * @version 1.0 2019-11-25
+ * @author Jaeren William Tredway
  * This class builds a new card with a suit, rank, and a boolean indicating
- * if it is face up.
+ * if it is face up, and has methods for cards.
  */
 public class Card {
 
@@ -45,7 +47,7 @@ public class Card {
      * This finds out if the card is facing up.
      * @return (type boolean): returns true if the card is facing up
      */
-    public boolean isFaceup () {
+    public boolean isFaceUp () {
         return faceUp;
     }//******************************************************************
 
@@ -68,7 +70,7 @@ public class Card {
      * This flips the card over
      */
     public void flipOver () {
-        faceUp = !isFaceup();
+        faceUp = !isFaceUp();
     }//******************************************************************
 
 
