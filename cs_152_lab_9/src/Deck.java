@@ -13,8 +13,7 @@ public class Deck {
     private Card[] deck;
     private int subDeckSize = 0;
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * This is the constructor that builds a deck of cards.
      * The bottom card in the deck will be stored at index zero in the array.
      * "deck" objects can be either the entire deck, or each pile of cards
@@ -23,12 +22,10 @@ public class Deck {
     public Deck() {
         this.deck = new Card[TOTAL_DECK_SIZE];
         this.subDeckSize = 0;
-
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * This method adds a card to the top of this deck.
      *
      * @param card (type Card): The card to add.
@@ -36,12 +33,10 @@ public class Deck {
     public void add(Card card) {
         deck[subDeckSize] = card;
         subDeckSize++;
-
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Fills the deck with all the cards in a standard deck of cards.
      * Uses the Enum.values() method to get arrays of all the Rank
      * values and Suit values so I can relate int indices to the Enum values.
@@ -56,8 +51,7 @@ public class Deck {
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Returns the nth card in this deck, where card 0 is the one on the
      * bottom. Assumes the deck is not empty. Does not modify the deck.
      *
@@ -70,8 +64,7 @@ public class Deck {
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Moves one card from the top of this deck to the top of the other deck.
      *
      * @param other (type Deck): the deck you are moving to
@@ -84,8 +77,7 @@ public class Deck {
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Moves the top n cards from the top of this deck to the top of the
      * other deck, maintaining their order so that the card that was on top
      * of this deck becomes the top card of the other deck.
@@ -103,8 +95,7 @@ public class Deck {
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Returns the number of cards in this deck.
      *
      * @return (type int): the number of cards
@@ -121,8 +112,7 @@ public class Deck {
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Returns the top card on this deck. Returns null if the deck is empty.
      * Does not modify the deck.
      *
@@ -137,8 +127,7 @@ public class Deck {
     }//******************************************************************
 
 
-    /**
-     * ****************************************************************
+    /** *****************************************************************
      * Randomly reorders the cards in this deck using Fisher-Yates shuffle.
      * Is able to correctly shuffle any non-empty deck.
      * research source: http://math.hws.edu/javanotes/source/chapter5/Deck.java
