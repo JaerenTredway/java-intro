@@ -8,8 +8,8 @@ public class Card {
 
 
     // INSTANCE MEMBER VARIABLES:
-    private Rank rank;
-    private Suit suit;
+    private Rank rank = Rank.JACK;
+    private Suit suit = Suit.HEARTS;
     private boolean faceUp = true;
 
     /** *****************************************************************

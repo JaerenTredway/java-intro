@@ -5,7 +5,7 @@
  */
 public class Deck {
 
-    public static final int TOTAL_DECK_SIZE = 52;
+    private static final int TOTAL_DECK_SIZE = 52;
 
     //INSTANCE MEMBER VARIABLES:
     private Card[] deck;
@@ -26,10 +26,11 @@ public class Deck {
 
     /** *****************************************************************
      * This method adds a card to the top of this deck.
-     * @param card (tyoe Card): The card to add.
+     * @param card (type Card): The card to add.
+     * FIXME: this is where the null pointer exception starts:
      */
     public void add(Card card) {
-        this.deck[subDeckSize] = card;
+        deck[subDeckSize] = card;
         subDeckSize++;
 
     }//******************************************************************
@@ -67,7 +68,10 @@ public class Deck {
      * @param other (type Deck): the deck you are moving to
      */
     public void moveTo(Deck other) {
-        //TODO
+        other.add(this.deck[this.subDeckSize-1]);
+        this.deck[this.subDeckSize-1] = null;
+        subDeckSize -= 1;
+
     }//******************************************************************
 
 
@@ -79,7 +83,12 @@ public class Deck {
      * @param n (type int): the top n cards to move
      */
     public void moveTo(Deck other, int n) {
-        //TODO
+        for (int i = 0; i < n; i++) {
+            other.add(this.deck[subDeckSize-n+i]);
+            this.deck[subDeckSize-n+i] = null;
+        }
+        this.subDeckSize -= n;
+
     }//******************************************************************
 
 
@@ -89,6 +98,8 @@ public class Deck {
      */
     public int size() {
         int numCards = 0;
+
+        //if (deck == null) return -1;
 
         for (int i = 0; i < deck.length; i++) {
             if (deck[i] != null) numCards++;
@@ -104,7 +115,9 @@ public class Deck {
      * @return (type Card): the card at the top of the deck
      */
     public Card getTopCard() {
-        return deck.length == 0 ? null : deck[subDeckSize];
+        if (deck.length == 0) return null;
+        else return  deck[0] == null ? null : deck[subDeckSize-1];
+
     }//******************************************************************
 
 

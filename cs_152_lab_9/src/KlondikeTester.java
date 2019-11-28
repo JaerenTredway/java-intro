@@ -107,6 +107,9 @@ public class KlondikeTester {
         Deck deck = new Deck();
         deck.fill();
         Deck d = new Deck();
+        System.out.println("***Starting card = " + deck.getCardAt(49).getRank());
+        System.out.println("***Starting card = " + deck.getCardAt(50).getRank());
+        System.out.println("***Starting card = " + deck.getCardAt(51).getRank());
         d.add(new Card(Rank.NINE, Suit.HEARTS));
         Card[] before = { deck.getCardAt(49), deck.getCardAt(50), deck.getCardAt(51) };
         deck.moveTo(d, 3);
@@ -120,6 +123,12 @@ public class KlondikeTester {
             countTest(c != null && before[i].getRank() == c.getRank());
             countTest(c != null && before[i].getSuit() == c.getSuit());
         }
+
+        System.out.println("Moved card = " + d.getCardAt(0).getRank());
+        System.out.println("Moved card = " + d.getCardAt(1).getRank());
+        System.out.println("Moved card = " + d.getCardAt(2).getRank());
+        System.out.println("Moved card = " + d.getCardAt(3).getRank());
+
     }
 
     public static void testShuffle() {
@@ -274,23 +283,23 @@ public class KlondikeTester {
     public static void testDrawNextCard() {
         KlondikeModel model = null;
         try { model = new KlondikeModel(); } catch (Exception ignore) {}
-        countTest(null != model);
+        countTest(model != null);
         // There are 23 cards left in the deck after the initial deal
         for (int i = 1; i <= 23; i++) {
-            if(null != model) model.drawNextCard();
-            countTest(null != model && 23 - i == model.getDeck().size());
-            countTest(null != model && 1 + i == model.getDrawPile().size());
+            if(model != null) model.drawNextCard();
+            countTest(model != null && 23 - i == model.getDeck().size());
+            countTest(model != null && 1 + i == model.getDrawPile().size());
         }
         // Trying to draw another card should flip the deck
-        if(null != model) model.drawNextCard();
-        countTest(null != model && 0 == model.getDrawPile().size());
-        countTest(null != model && 24 == model.getDeck().size());
+        if(model != null) model.drawNextCard();
+        countTest(model != null && 0 == model.getDrawPile().size());
+        countTest(model != null && 24 == model.getDeck().size());
     }
 
     public static void testMoveToFoundation() {
         KlondikeModel model = null;
         try { model = new KlondikeModel(); } catch (Exception ignore) {}
-        countTest(null != model);
+        countTest(model != null);
         Deck source = new Deck();
         source.add(new Card(Rank.SEVEN, Suit.SPADES));
         Card c = source.getTopCard();
@@ -298,12 +307,12 @@ public class KlondikeTester {
         source.add(new Card(Rank.TWO, Suit.HEARTS));
         source.add(new Card(Rank.ACE, Suit.HEARTS));
         // This illegal move should have no effect
-        if(null != model) model.moveToFoundation(source, Suit.CLUBS.ordinal());
+        if(model != null) model.moveToFoundation(source, Suit.CLUBS.ordinal());
         // These should work
-        if(null != model) model.moveToFoundation(source, Suit.HEARTS.ordinal());
-        if(null != model) model.moveToFoundation(source, Suit.HEARTS.ordinal());
+        if(model != null) model.moveToFoundation(source, Suit.HEARTS.ordinal());
+        if(model != null) model.moveToFoundation(source, Suit.HEARTS.ordinal());
         // This should not
-        if(null != model) model.moveToFoundation(source, Suit.SPADES.ordinal());
+        if(model != null) model.moveToFoundation(source, Suit.SPADES.ordinal());
         countTest(1 == source.size());
         Card d = source.getTopCard();
         countTest(d != null && d.isFaceUp());
@@ -354,9 +363,7 @@ public class KlondikeTester {
         int correct = 0;
         int total = 0;
 
-        System.out.println("SQWaaAAK!");
-
-        System.out.println("========== TESTING## STUDENT CODE ========== ");
+        System.out.println("========== TESTING STUDENT CODE ========== ");
         System.out.println("---------- testing Card ----------");
 
         clearCounts();

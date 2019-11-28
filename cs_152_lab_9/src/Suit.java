@@ -5,17 +5,4 @@ public enum Suit {
     HEARTS,
     DIAMONDS;
 
-    /**
-     * This returns an array with all the enum values
-     * @return (type Suit[]): an array of Suit values
-     */
-//    public Suit[] suitValues () {
-////        return new Suit[] {
-////                Suit.CLUBS,
-////                Suit.SPADES,
-////                Suit.HEARTS,
-////                Suit.DIAMONDS,
-////        };
-////    }
-
 }
