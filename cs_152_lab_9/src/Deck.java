@@ -13,13 +13,14 @@ public class Deck {
 
     /** *****************************************************************
      * This is the constructor that builds a deck of cards.
-     * The bottom card in the deck wil be stored at index zero in the array.
-     * "deck" here refers to both the entire deck, and each pile of cards
+     * The bottom card in the deck will be stored at index zero in the array.
+     * "deck" objects can be either the entire deck, or each pile of cards
      * during game play.
      */
     public Deck() {
         this.deck = new Card[TOTAL_DECK_SIZE];
         this.subDeckSize = 0;
+
     }//******************************************************************
 
 
@@ -28,18 +29,24 @@ public class Deck {
      * @param card (tyoe Card): The card to add.
      */
     public void add(Card card) {
-        //TODO
+        this.deck[subDeckSize] = card;
+        subDeckSize++;
+
     }//******************************************************************
 
 
     /** *****************************************************************
      * Fills the deck with all the cards in a standard deck of cards.
-     * TODO: You should not explicitly construct and add all 52 possible cards.
-     * Use methods provided in the RANK and SUIT enums to examine all the
-     * possible combinations.
+     * Uses the Enum.values() method to get arrays of all the Rank
+     * values and Suit values so I can relate int indices to the Enum values.
      */
     public void fill() {
-        //TODO
+        for (int i = 0; i < Suit.values().length; i++) {
+            for (int j = 0; j < Rank.values().length; j++) {
+                add(new Card(Rank.values()[j], Suit.values()[i]));
+            }
+        }
+
     }//******************************************************************
 
 
@@ -51,6 +58,7 @@ public class Deck {
      */
     public Card getCardAt(int n) {
         return deck[n];
+
     }//******************************************************************
 
 
@@ -80,29 +88,40 @@ public class Deck {
      * @return (type int): the number of cards
      */
     public int size() {
-        return 0;
-        //TODO
+        int numCards = 0;
+
+        for (int i = 0; i < deck.length; i++) {
+            if (deck[i] != null) numCards++;
+        }
+
+        return numCards;
     }//******************************************************************
 
 
     /** *****************************************************************
      * Returns the top card on this deck. Returns null if the deck is empty.
      * Does not modify the deck.
-     * @return
+     * @return (type Card): the card at the top of the deck
      */
     public Card getTopCard() {
-        return null;
-        //TODO
+        return deck.length == 0 ? null : deck[subDeckSize];
     }//******************************************************************
 
 
     /** *****************************************************************
      * Randomly reorders the cards in this deck.
      * Is able to correctly shuffle any non-empty deck.
-     * research source: TODO: url here**
+     * research source: http://math.hws.edu/javanotes/source/chapter5/Deck.java
      */
     public void shuffle() {
-        //TODO
+
+        for (int i = deck.length-1; i > 0; i--) {
+            int randomNum = (int)(Math.random()*(i+1));
+
+            Card temp = deck[i];
+            deck[i] = deck[randomNum];
+            deck[randomNum] = temp;
+        }
     }//******************************************************************
 
 

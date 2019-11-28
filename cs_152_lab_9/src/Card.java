@@ -10,7 +10,7 @@ public class Card {
     // INSTANCE MEMBER VARIABLES:
     private Rank rank;
     private Suit suit;
-    private boolean faceUp = false;
+    private boolean faceUp = true;
 
     /** *****************************************************************
      * This is the constructor that builds a new card.

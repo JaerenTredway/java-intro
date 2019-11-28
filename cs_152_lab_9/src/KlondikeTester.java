@@ -14,7 +14,7 @@ public class KlondikeTester {
             correctTests++;
         } else {
             // Uncomment for a trace of which test failed.
-            //new Exception("Failed Test").printStackTrace();
+            // new Exception("Failed Test").printStackTrace();
         }
         totalTests++;
     }
@@ -354,7 +354,9 @@ public class KlondikeTester {
         int correct = 0;
         int total = 0;
 
-        System.out.println("========== TESTING STUDENT CODE ========== ");
+        System.out.println("SQWaaAAK!");
+
+        System.out.println("========== TESTING## STUDENT CODE ========== ");
         System.out.println("---------- testing Card ----------");
 
         clearCounts();
