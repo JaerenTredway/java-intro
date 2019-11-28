@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @version 1.0 2019-11-25
  * @author Jaeren William Tredway
@@ -11,7 +13,8 @@ public class Deck {
     private Card[] deck;
     private int subDeckSize = 0;
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * This is the constructor that builds a deck of cards.
      * The bottom card in the deck will be stored at index zero in the array.
      * "deck" objects can be either the entire deck, or each pile of cards
@@ -24,10 +27,11 @@ public class Deck {
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * This method adds a card to the top of this deck.
+     *
      * @param card (type Card): The card to add.
-     * FIXME: this is where the null pointer exception starts:
      */
     public void add(Card card) {
         deck[subDeckSize] = card;
@@ -36,7 +40,8 @@ public class Deck {
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * Fills the deck with all the cards in a standard deck of cards.
      * Uses the Enum.values() method to get arrays of all the Rank
      * values and Suit values so I can relate int indices to the Enum values.
@@ -51,9 +56,11 @@ public class Deck {
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * Returns the nth card in this deck, where card 0 is the one on the
      * bottom. Assumes the deck is not empty. Does not modify the deck.
+     *
      * @param n (type int): the index of the card you are looking for
      * @return (type Card): the card that is at the nth index
      */
@@ -63,77 +70,90 @@ public class Deck {
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * Moves one card from the top of this deck to the top of the other deck.
+     *
      * @param other (type Deck): the deck you are moving to
      */
     public void moveTo(Deck other) {
-        other.add(this.deck[this.subDeckSize-1]);
-        this.deck[this.subDeckSize-1] = null;
+        other.add(this.deck[this.subDeckSize - 1]);
+        this.deck[this.subDeckSize - 1] = null;
         subDeckSize -= 1;
 
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * Moves the top n cards from the top of this deck to the top of the
      * other deck, maintaining their order so that the card that was on top
      * of this deck becomes the top card of the other deck.
+     *
      * @param other (type Deck): the deck you are moving to
-     * @param n (type int): the top n cards to move
+     * @param n     (type int): the top n cards to move
      */
     public void moveTo(Deck other, int n) {
         for (int i = 0; i < n; i++) {
-            other.add(this.deck[subDeckSize-n+i]);
-            this.deck[subDeckSize-n+i] = null;
+            other.add(this.deck[subDeckSize - n + i]);
+            this.deck[subDeckSize - n + i] = null;
         }
         this.subDeckSize -= n;
 
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * Returns the number of cards in this deck.
+     *
      * @return (type int): the number of cards
      */
     public int size() {
         int numCards = 0;
 
-        //if (deck == null) return -1;
-
         for (int i = 0; i < deck.length; i++) {
-            if (deck[i] != null) numCards++;
+            if (deck[i] != null)
+                numCards++;
         }
 
         return numCards;
     }//******************************************************************
 
 
-    /** *****************************************************************
+    /**
+     * ****************************************************************
      * Returns the top card on this deck. Returns null if the deck is empty.
      * Does not modify the deck.
+     *
      * @return (type Card): the card at the top of the deck
      */
     public Card getTopCard() {
-        if (deck.length == 0) return null;
-        else return  deck[0] == null ? null : deck[subDeckSize-1];
+        if (deck.length == 0)
+            return null;
+        else
+            return deck[0] == null ? null : deck[subDeckSize - 1];
 
     }//******************************************************************
 
 
-    /** *****************************************************************
-     * Randomly reorders the cards in this deck.
+    /**
+     * ****************************************************************
+     * Randomly reorders the cards in this deck using Fisher-Yates shuffle.
      * Is able to correctly shuffle any non-empty deck.
      * research source: http://math.hws.edu/javanotes/source/chapter5/Deck.java
+     * and https://dev.to/s_awdesh/everyday-im-shuffling-im-a-card--fire-1f8b
      */
     public void shuffle() {
+        Random random = new Random();
 
-        for (int i = deck.length-1; i > 0; i--) {
-            int randomNum = (int)(Math.random()*(i+1));
+        for (int i = size() - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            //swap:
+            Card temp = deck[index];
+            deck[index] = deck[i];
+            deck[i] = temp;
 
-            Card temp = deck[i];
-            deck[i] = deck[randomNum];
-            deck[randomNum] = temp;
         }
     }//******************************************************************
 
